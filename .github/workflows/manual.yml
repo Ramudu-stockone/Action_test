@@ -13,10 +13,12 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: pull-request
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: *mai*
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_label: "feature, automated pr"
-          pr_title: "[Example] Simple demo"
+      - name: Install hub
+        uses: geertvdc/setup-hub@master
+    
+      - name: run hub commands
+        env:
+          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |  
+          hub pull-request   -b main   -h random   --no-edit   -m "[Example] Simple demo" -l "feature, automated pr"
