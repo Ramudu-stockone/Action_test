@@ -15,9 +15,7 @@ jobs:
         uses: actions/checkout@v2
     
       - name: run hub commands
-        env:
-          GITHUB_USER: ${{ secrets.GITHUB_USER }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ACTIONS_ALLOW_UNSECURE_COMMANDS:  true
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |  
-          hub pull-request   -b main   -h random   --no-edit   -m "[Example] Simple demo" -l "feature, automated pr"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} hub pull-request   -b main   -h random -m "[Example] Simple demo" -l "feature, automated pr"
