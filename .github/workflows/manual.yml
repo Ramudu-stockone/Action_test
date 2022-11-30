@@ -11,18 +11,13 @@ jobs:
   create-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - run: hub --version
-#       - name: Check out repository code
-#         uses: actions/checkout@v2
-#       - name: Install hub
-#         uses: geertvdc/setup-hub@master
+      - name: Check out repository code
+        uses: actions/checkout@v2
     
-#       - name: run hub commands
-#         env:
-#           GITHUB_USER: ${{ secrets.GITHUB_USER }}
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           ACTIONS_ALLOW_UNSECURE_COMMANDS:  true
-#         run: |  
-#           hub pull-request   -b main   -h random   --no-edit   -m "[Example] Simple demo" -l "feature, automated pr"
+      - name: run hub commands
+        env:
+          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACTIONS_ALLOW_UNSECURE_COMMANDS:  true
+        run: |  
+          hub pull-request   -b main   -h random   --no-edit   -m "[Example] Simple demo" -l "feature, automated pr"
