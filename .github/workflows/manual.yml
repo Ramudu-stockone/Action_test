@@ -18,4 +18,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |  
-          hub pull-request   -b main   -h random -m "[Example] Simple demo" -l "feature, automated pr"
+          hub pull-request   -b main   -h random -m "[Example] Simple demo" -l "feature, automated pr" || true
