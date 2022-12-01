@@ -21,5 +21,8 @@ jobs:
       - name: run hub commands
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |  
-          hub pull-request   -b ${GITHUB_REF##*/} -h main -m "request came from workflow" -l "feature, automated pr" || true
+        run: |
+         for i in release1,release2
+         do
+            hub pull-request   -b i -h main -m "request came from workflow" -l "feature, automated pr" || true
+         done
