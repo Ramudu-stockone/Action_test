@@ -5,11 +5,7 @@ name: Ram workflow random
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
-   pull_request:
-    types:
-      - closed
-    branches:
-      - main
+   workflow_dispatch:
 
 jobs:
   create-pull-request:
@@ -22,5 +18,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |  
-          hub pull-request   -b releas*   -h main -m "request came from workflow" -l "feature, automated pr" || true
+          hub pull-request   -b ${GITHUB_REF##*/}  -h main -m "request came from workflow" -l "feature, automated pr" || true
           
