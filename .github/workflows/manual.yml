@@ -1,11 +1,15 @@
 # This is a basic workflow that is manually triggered
 
-name: Ram workflow main
+name: Ram workflow random
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
-  workflow_dispatch:
+   pull_request:
+    types:
+      - closed
+    branches:
+      - main
 
 jobs:
   create-pull-request:
@@ -13,10 +17,9 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: pull-request
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: "main"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_label: "feature, automated pr"
-          pr_title: "[Example] Simple demo"
+    
+      - name: run hub commands
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |  
+          hub pull-request   -b main   -h maim -m "request came from workflow" -l "feature, automated pr" || true
