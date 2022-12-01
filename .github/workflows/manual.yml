@@ -20,5 +20,5 @@ jobs:
         run: |
          for i in release1 release2
          do
-            hub pull-request   -b $i -h main -m "request came from workflow" -l "feature, automated pr" || true
+            hub pull-request   -b $i -h main --no-edit  -m "request came from workflow" -l "feature, automated pr" || true
          done
