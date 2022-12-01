@@ -1,53 +1,24 @@
 # This is a basic workflow that is manually triggered
 
-# name: Ram workflow random
+name: Ram workflow random
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
-name: Sync
+
 on:
-  workflow_dispatch
+   workflow_dispatch
 
 jobs:
-  sync-branches:
-    runs-on: ubuntu-20.04
-    name: Syncing branches
+  create-pull-request:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Sync Branches PR
-        uses: cyberdantes/filter-branches@1
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          TARGET_BRANCH_STARTS_WITH: "feature/"
-# on:
-#    workflow_dispatch
-
-# jobs:
-#   create-pull-request:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Check out repository code
-#         uses: actions/checkout@v2
-#       - name: Set up Node
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#       - name: Sync Branches PR
-#         uses: cyberdantes/filter-branches@1
-#         with:
-#           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-#           TARGET_BRANCH_STARTS_WITH: "re/"
-# #       - name: run hub commands
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         run: |
-#          MYVAR=$(curl \
-#          -H "Accept: application/vnd.github+json" \
-#          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-#          https://api.github.com/repos/Ramudu-stockone/Action_test/branches)
-#          echo $MYVAR
+        
+      - name: run hub commands
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+         MYVAR=$(curl \
+         -H "Accept: application/vnd.github+json" \
+         -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+         https://api.github.com/repos/Ramudu-stockone/Action_test/branches | json -a id)
+         echo $MYVAR
