@@ -17,8 +17,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-         MYVAR=$(curl \
+         curl \
          -H "Accept: application/vnd.github+json" \
          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-         https://api.github.com/repos/Ramudu-stockone/Action_test/branches | json -a id)
-         echo $MYVAR
+         https://api.github.com/repos/Ramudu-stockone/Action_test/branches >> output.txt
+         cat output.txt
