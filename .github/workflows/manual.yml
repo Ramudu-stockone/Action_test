@@ -20,6 +20,6 @@ jobs:
         run: |
          MYVAR=$(curl \
          -H "Accept: application/vnd.github+json" \
-         -H "Authorization: Bearer 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" \
+         -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
          https://api.github.com/repos/Ramudu-stockone/Action_test/branches)
          echo $MYVAR
