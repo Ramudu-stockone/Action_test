@@ -20,5 +20,5 @@ jobs:
          curl \
          -H "Accept: application/vnd.github+json" \
          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-         https://api.github.com/repos/Ramudu-stockone/Action_test/branches >> output.txt
-         cat output.txt
+         https://api.github.com/repos/Ramudu-stockone/Action_test/branches |\
+         python3 -c "import sys, json; print(json.load(sys.stdin)[0]['name'])"
