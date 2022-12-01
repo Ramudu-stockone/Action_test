@@ -17,8 +17,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-         curl \
+         var = $(curl \
          -H "Accept: application/vnd.github+json" \
          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
          https://api.github.com/repos/Ramudu-stockone/Action_test/branches |\
-         python3 -c "import sys, json; [print(i['name']) for i in json.load(sys.stdin) if 'release' in i['name']]"
+         python3 -c "import sys, json; [print(i['name'],end=" ") for i in json.load(sys.stdin) if 'release' in i['name']]")
+         echo $var
