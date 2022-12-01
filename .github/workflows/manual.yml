@@ -21,4 +21,4 @@ jobs:
          -H "Accept: application/vnd.github+json" \
          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
          https://api.github.com/repos/Ramudu-stockone/Action_test/branches |\
-         python3 -c "import sys, json; [print(i['name']) if "release" in i['name'] for i in json.load(sys.stdin)]"
+         python3 -c "import sys, json; [print(i['name']) for i in json.load(sys.stdin) if "release" in i['name']]"
