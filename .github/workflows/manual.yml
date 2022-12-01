@@ -5,11 +5,7 @@ name: Ram workflow random
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
-   pull_request:
-    types:
-      - closed
-    branches:
-      - main
+   workflow_dispatch
 
 jobs:
   create-pull-request:
