@@ -5,11 +5,7 @@ name: Ram workflow random
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
-   pull_request:
-    types:
-      - closed
-    branches:
-      - main
+   workflow_dispatch
 
 jobs:
   create-pull-request:
@@ -21,5 +17,9 @@ jobs:
       - name: run hub commands
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |  
-          hub pull-request   -b ${GITHUB_REF##*/} -h main -m "request came from workflow" -l "feature, automated pr" || true
+        run: |
+         MYVAR=$(curl \
+         -H "Accept: application/vnd.github+json" \
+         -H "Authorization: Bearer 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" \
+         https://api.github.com/repos/Ramudu-stockone/Action_test/branches)
+         echo $MYVAR
