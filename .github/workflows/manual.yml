@@ -1,17 +1,19 @@
 # This is a basic workflow that is manually triggered
 
-name: Ram workflow random
+# name: Ram workflow random
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
+name: Sync
 on:
-   workflow_dispatch
+  workflow_dispatch
 
 jobs:
-  create-pull-request:
-    runs-on: ubuntu-latest
+  sync-branches:
+    runs-on: ubuntu-20.04
+    name: Syncing branches
     steps:
-      - name: Check out repository code
+      - name: Checkout
         uses: actions/checkout@v2
       - name: Set up Node
         uses: actions/setup-node@v1
@@ -21,8 +23,26 @@ jobs:
         uses: cyberdantes/filter-branches@1
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          TARGET_BRANCH_STARTS_WITH: "re/"
-#       - name: run hub commands
+          TARGET_BRANCH_STARTS_WITH: "feature/"
+# on:
+#    workflow_dispatch
+
+# jobs:
+#   create-pull-request:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check out repository code
+#         uses: actions/checkout@v2
+#       - name: Set up Node
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: 12
+#       - name: Sync Branches PR
+#         uses: cyberdantes/filter-branches@1
+#         with:
+#           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+#           TARGET_BRANCH_STARTS_WITH: "re/"
+# #       - name: run hub commands
 #         env:
 #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #         run: |
