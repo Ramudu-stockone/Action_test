@@ -22,4 +22,7 @@ jobs:
          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
          https://api.github.com/repos/Ramudu-stockone/Action_test/branches |\
          python3 -c "import sys, json; [print(i['name'],end=' ') for i in json.load(sys.stdin) if 'release' in i['name']]")
-         echo $var
+         for branch in $var
+         do
+            hub pull-request   -b $i -h main --no-edit  -m "request came from workflow" -l "feature, automated pr" || true
+         done
